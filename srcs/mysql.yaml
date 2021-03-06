@@ -7,28 +7,25 @@ metadata:
 spec:
   ports:
   - port: 3306
-    protocol: TCP
     targetPort: 3306
+    protocol: TCP
   selector:
     app: mysql
-
 ---
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: mypvc
   labels:
     app: mysql
-  name: mysql-pvc
 spec:
-  accessModes:
-  - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -51,16 +48,29 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: my_mysql
+      - name: mysql
+        image: my_mysql
         imagePullPolicy: Never
-        name: mysql
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         ports:
-        - name: mysql
-          containerPort: 3306
+        - containerPort: 3306
+          name: mysql
         volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: var/lib/mysql
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+        livenessProbe:
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep mysqld'
+          initialDelaySeconds: 10
+          periodSeconds: 5
       volumes:
-        - name: mysql-persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql-pvc
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mypvc
+      restartPolicy: Always

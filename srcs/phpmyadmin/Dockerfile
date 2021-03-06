@@ -1,4 +1,4 @@
-FROM	alpine
+FROM	alpine:3.12.1
 
 RUN		apk add wget php7 php7-fpm php7-mysqli php7-mbstring php7-json php7-session && \
 		apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache && \
@@ -11,6 +11,8 @@ COPY	/srcs/telegraf.conf			/etc/telegraf/
 COPY	/srcs/config.inc.php		/www/phpmyadmin/
 COPY	/srcs/start.sh				/
 
+RUN		chmod +x start.sh
+
 EXPOSE	5000
 
-ENTRYPOINT sh start.sh
+CMD ./start.sh

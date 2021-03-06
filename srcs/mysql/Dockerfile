@@ -1,14 +1,23 @@
-FROM	alpine
+FROM	alpine:3.12.1
 
-RUN		apk add mariadb mariadb-client && \
-		apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache && \
-		mkdir -p /run/mysqld/
 
-COPY	/srcs/telegraf.conf		/etc/telegraf/
-COPY	/srcs/my.cnf			/etc/
-COPY	/srcs/wordpress.sql		/
-COPY	/srcs/start.sh			/
+RUN		apk upgrade --update && \
+		apk add --no-cache mysql mysql-client
+		
+COPY	/srcs/telegraf.conf		./
+COPY	/srcs/my.cnf			./
+COPY	/srcs/wordpress.sql		./
+COPY	/srcs/start.sh			./
+
+RUN chmod +x start.sh
+		
+RUN 	mkdir -p /run/mysqld && \
+		mv my.cnf /etc/
+
+RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community telegraf && \
+	mkdir -p /etc/telegraf && \
+	mv telegraf.conf /etc/telegraf/
 
 EXPOSE 3306
 
-ENTRYPOINT	sh start.sh
+CMD ./start.sh
