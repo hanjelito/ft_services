@@ -12,8 +12,8 @@ mysql -u root --execute="CREATE DATABASE wordpress;"
 # Import previously backed up database to MariaDB database server (wordpress < /wordpress.sql).
 mysql -u root wordpress < wordpress.sql
 
-# Create new user "root" with password "toor" and give permissions.
-mysql -u root --execute="CREATE USER 'root'@'%' IDENTIFIED BY 'toor'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; USE wordpress; FLUSH PRIVILEGES;"
+# Create new user "root" with password "123456" and give permissions.
+mysql -u root --execute="CREATE USER 'root'@'%' IDENTIFIED BY '123456'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; USE wordpress; FLUSH PRIVILEGES;"
 
 # Start Telegraf and sleep infinity for avoid container to stop.
 telegraf & sleep infinite

@@ -4,6 +4,8 @@ metadata:
   labels:
     app: mysql
   name: mysql
+  annotations:
+    metallb.universe.tf/address-pool: default
 spec:
   ports:
   - port: 3306

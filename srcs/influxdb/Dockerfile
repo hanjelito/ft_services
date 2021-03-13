@@ -1,4 +1,4 @@
-FROM 	alpine
+FROM	alpine:3.12.1
 
 RUN		apk update && apk add openrc --no-cache && \
 		apk add influxdb && \
@@ -9,6 +9,8 @@ RUN		apk update && apk add openrc --no-cache && \
 COPY	/srcs/telegraf.conf			/etc/
 COPY	/srcs/start.sh				/
 
+RUN		chmod +x start.sh
+
 EXPOSE	8086
 
-ENTRYPOINT sh start.sh
+CMD ./start.sh
