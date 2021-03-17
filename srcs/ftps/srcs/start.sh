@@ -1,4 +1,7 @@
 #!/bin/sh
 
-# Start Telegraf and vsFTPd.
-telegraf & vsftpd /etc/vsftpd/vsftpd.conf
+# Start telegraf
+/usr/bin/telegraf &
+
+# Start vsftpd
+/usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf

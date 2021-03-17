@@ -7,7 +7,7 @@ RUN		apk add grafana --repository http://dl-cdn.alpinelinux.org/alpine/edge/comm
 
 
 COPY	/srcs/telegraf.conf			/etc/telegraf/
-#COPY	/srcs/grafana.db			/usr/share/grafana/data/
+COPY	/srcs/grafana.db			/usr/share/grafana/data/
 COPY	/srcs/start.sh				./
 
 RUN		chmod +x start.sh

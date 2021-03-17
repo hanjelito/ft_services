@@ -11,10 +11,10 @@ RUN		mkdir -p /var/www && mv /wordpress /var/www/
 
 COPY	/srcs/telegraf.conf			/etc/telegraf/
 COPY	/srcs/wp-config.php			/var/www/wordpress/
-COPY	/srcs/start.sh				/
+COPY	/srcs/start.sh				./
 
 RUN		chmod +x start.sh
 
 EXPOSE	5050
 
-ENTRYPOINT sh start.sh
+CMD ./start.sh

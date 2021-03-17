@@ -30,6 +30,9 @@ kubectl apply -f srcs/nginx.yaml
 docker build -t my_mysql ./srcs/mysql 2> error_mysql 1> /dev/null 
 kubectl apply -f srcs/mysql.yaml
 #
+docker build -t my_ftps ./srcs/ftps 2> error_ftps 1> /dev/null
+kubectl apply -f srcs/ftps.yaml
+#
 docker build -t my_phpmyadmin ./srcs/phpmyadmin 2> error_phpmyadmin 1> /dev/null
 kubectl apply -f srcs/phpmyadmin.yaml
 #
@@ -41,9 +44,7 @@ kubectl apply -f srcs/influxdb.yaml
 #
 docker build -t my_grafana ./srcs/grafana 2> error_grafana 1> /dev/null
 kubectl apply -f srcs/grafana.yaml
-#
-docker build -t my_ftps ./srcs/ftps 2> error_ftps 1> /dev/null
-kubectl apply -f srcs/ftps.yaml
+
 # docker build -t my_ftps srcs/ftps > /dev/null 2>&1
 echo "${BLUE}Docker build completed${END}"
 
