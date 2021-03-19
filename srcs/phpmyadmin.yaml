@@ -50,7 +50,7 @@ spec:
             command:
             - /bin/ash
             - -c
-            - 'pgrep php'
+            - 'pgrep nginx'
           initialDelaySeconds: 10
           periodSeconds: 5
       restartPolicy: Always
