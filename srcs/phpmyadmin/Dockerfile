@@ -14,7 +14,7 @@ RUN		chown -R www:www /var/lib/nginx && \
 		chown -R www:www /www
 
 COPY	/srcs/telegraf.conf			/etc/telegraf/
-# COPY 	/srcs/nginx.conf			/etc/nginx/
+COPY 	/srcs/nginx.conf			/etc/nginx/nginx.conf
 COPY	/srcs/config.inc.php		/www/phpmyadmin/
 COPY	/srcs/start.sh				/
 

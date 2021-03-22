@@ -14,7 +14,8 @@ killall -TERM kubectl minikube VBoxHeadless
 # Start minikube.
 minikube config unset vm-driver
 minikube start --driver=virtualbox
-kubectl proxy & > /dev/null
+# kubectl proxy & > /dev/null
+kubectl proxy --address="0.0.0.0"  --port=9090 & > /dev/null
 # Use the docker daemon from minikube.
 #eval $(minikube -p minikube docker-env)
 
