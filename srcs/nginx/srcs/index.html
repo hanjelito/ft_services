@@ -65,5 +65,12 @@
         <br/><br/>
         <p><em>ssh juan_gon@192.168.99.102</em></p>
         <p><em>password: 123456</em></p>
+
+        <br/>
+        <a href="#" target="_blank">kill deployment</a>
+        <br/><br/>
+        <p><em>kubectl exec deploy/mysql -- pkill mysql</em></p>
+        <p><em>kubectl exec deploy/influxdb -- pkill influxd</em></p>
+        <p><em>kubectl exec deploy/nginx -- pkill sshd</em></p>
     </body>
 </html>
